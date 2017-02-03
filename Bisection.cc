@@ -1,14 +1,14 @@
-//Bisection.cc: Miguel Montoya
-//Description: Bisection
+// Bisection.cc: Miguel Montoya
+// Description: Bisection
 
 #include <iostream>
 #include <cmath>
 using namespace std;
 
-#define FUNCTION (pow(x, 3) - 1)/(x + 1);
-
+// 13x^3+5x^2-20
 double f (double x){
-    return (double) FUNCTION;
+    double result;
+	return 13*pow(x,3)+5*pow(x,2)-20;
 }
 
 int main(){
@@ -23,13 +23,16 @@ int main(){
     fx1 = f(x1);
     xm = (x0 + x1)/2;
     fxm = f(xm);
-    
+    // Only enter the loop if the results of the functions
+	// are each in a difererent side of the x-axis.
     if(fx0 == 0){
         cout <<"Root: " << x0;
     }
     else if(fx1 == 0){
         cout <<"Root: " << x1;
     }
+    // Only enter the loop if the results of the functions
+	// are each in a difererent side of the x-axis.
     else if((fx0*fx1) < 0){
         int i = 0;
         do{
@@ -42,6 +45,7 @@ int main(){
             
             fx0 = f(x0);
             fx1 = f(x1);
+            // Get the value of x between x0 and x1
             xm = (x0 + x1)/2;
             fxm = f(xm);
             
