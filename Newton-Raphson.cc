@@ -6,11 +6,11 @@
 using namespace std;
 
 double f(double x) {
-	return pow(x,2);
+	return log(x - 1) + 1;
 }
 
 double fd(double x) {
-    return 2*x;
+    return 1 / (x-1);
 }
 
 int main() {
