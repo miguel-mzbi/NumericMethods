@@ -20,16 +20,7 @@ for p = 1:1:rX-1
     pivote = X(p,p);
     for i = p+1: 1: rX
         primFila = X(i,p)
-        X(i,:) = X(i,:) - (X(p, :)/pivote)*primFila
-    end
-end
-disp(X)
-
-for i = rX: -1: 2
-    pivote = X(i, i)
-    for j = i-1: -1: 1
-        primFila = X(j, i)
-        X(j, :) = X(j, :) - (X(i, :)/pivote)*primFila
+        X(i, :) = X(i, :) - (X(p, :)/pivote)*primFila
     end
 end
 disp(X)
@@ -40,7 +31,16 @@ for i = 1: rX
 end
 disp(X)
 
-for i = 1: rX
-    disp("x" + string(i) + " = " + string(X(i, cX)))
+sol = []
+sol(rX) = X(rX, cX)
+for i = rX-1: -1: 1
+    s = X(i, cX)
+    for j = rX: -1: i
+        s = s - X(i, j)*sol(j)
+    end
+    sol(i) = s
 end
 
+for i = 1: rX
+    disp("x" + string(i) + " = " + string(sol(i)))
+end
