@@ -25,14 +25,8 @@ for p = 1:1:rX-1
 end
 disp(X)
 
-for i = 1: rX
-    f = X(i, i)
-    X(i, :) = X(i, :)/f
-end
-disp(X)
-
 sol = []
-sol(rX) = X(rX, cX)
+sol(rX) = X(rX, cX)/X(rX, cX-1)
 for i = rX-1: -1: 1
     s = X(i, cX)
     for j = rX: -1: i
