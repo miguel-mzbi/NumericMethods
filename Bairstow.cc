@@ -6,7 +6,7 @@
 using namespace std;
 
 double f(double x) {
-	return log(x);
+	return pow(x, 2);
 }
 
 int main() {

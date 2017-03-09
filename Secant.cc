@@ -6,7 +6,7 @@
 using namespace std;
 
 double f(double x) {
-	return log(x);
+	return pow(x, 2);
 }
 
 int main() {
@@ -17,6 +17,8 @@ int main() {
     cin >> xn;
 
     do {
+        double a = f(xn);
+        double b = f(xp);
         xnt = xn - (f(xn) * (xp - xn)) / (f(xp) - f(xn));
         xp = xn;
         xn = xnt;
