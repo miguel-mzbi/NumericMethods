@@ -1,19 +1,9 @@
-mSize = input("Insert side lenght of square matrix: ")
-a = []
-b = []
-
-for i = 1: mSize
-    for j = 1: mSize
-        a(i, j) = input("Left side: A"+string(i)+string(j)+"= ")
-    end
-end
-
-for i = 1: mSize
-    b(i, 1) = input("Right side: b"+string(i)+"= ")
-end
+a = input("A = ")
+b = input("b = ")
 
 X = [a b]
 [rX cX] = size(X)
+disp("Augmented matrix before Gauss-Jordan elimination")
 disp(X)
 
 for p = 1:1:rX-1
@@ -23,7 +13,6 @@ for p = 1:1:rX-1
         X(i,:) = X(i,:) - (X(p, :)/pivote)*primFila
     end
 end
-disp(X)
 
 for i = rX: -1: 2
     pivote = X(i, i)
@@ -32,12 +21,12 @@ for i = rX: -1: 2
         X(j, :) = X(j, :) - (X(i, :)/pivote)*primFila
     end
 end
-disp(X)
 
 for i = 1: rX
     f = X(i, i)
     X(i, :) = X(i, :)/f
 end
+disp("Augmented matrix after Gauss-Jordan elimination")
 disp(X)
 
 for i = 1: rX
