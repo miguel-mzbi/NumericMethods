@@ -35,7 +35,7 @@ int main() {
         i++;
         cout << x << " | " << y << " | " << z << " | " << i << endl;
     }
-    while(abs(x + y + z - 12)>error || abs(2*x - y + z - 7)>error || abs(x + 2*y - z - 6)>error);
+    while(abs(x + y + z - 12)>error || abs(2*x - y + z - 7)>error || abs(x + 2*y - z - 6)>error); // Relative
     
     cout << "x = " << x << endl;
     cout << "y = " << y << endl;

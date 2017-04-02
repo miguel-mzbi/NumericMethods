@@ -9,13 +9,10 @@ int main() {
     // xy: accum of x*y
     // xsq: accum of x^2
     // avy: average of y
-    // xMes: x inside error loop
-    // yMes: y inside error loop
-    // yPros: value of y. y = alpha*e^(beta*xMes)
     // sr: yMes - yPros
     // st: yMes - avy
     // n: number of coords
-    double x, y, xy, xsq, avy, xMes, yMes, yPros, sr, st, n, i, a1, a0;
+    double x, y, xy, xsq, avy, xReal, yReal, yMes, sr, st, n, i, a1, a0;
     x = y = xy = xsq = avy = xMes = yMes = yPros = i = 0;
     cout << "Write n: ";
     cin >> n;
@@ -50,21 +47,21 @@ int main() {
     
     // Loop to get errors
     for(int i = 0; i < n; i++) {
-        myErrY >> yMes;
-        myErrX >> xMes;
-        yPros = a0*exp(a1*xMes);
-        sr += pow(yMes - yPros, 2);
-        st += pow(yMes - avy, 2);
+        myErrY >> yReal;
+        myErrX >> xReal;
+        yMes = a0*exp(a1*xReal);
+        sr += pow(yReal - yMes, 2);
+        st += pow(yReal - avy, 2);
     }
     
     myErrX.close();
     myErrY.close();
 
-    // Get Std. Error and Correlation Coef (r)
+    // Get Std. Error, Determiantion Coeff (r2) Correlation Coef (r)
     double stdError = sqrt(sr/(n-2));
-    double r = sqrt((st-sr)/st);
+    double r2 = (st-sr)/st;
+    double r = sqrt(r2);
     
     cout << "β = " << a1 << "\tα = " << a0 << endl;
-    cout << "Std. Error = " << stdError << "\tCorrelation Coefficient = " << r << endl;
-    
+    cout << "Std. Error = " << stdError << "\tDetermiantion Coefficient = " << r2 << "\tCorrelation Coefficient = " << r << endl;
 }

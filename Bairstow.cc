@@ -7,7 +7,7 @@
 
 using namespace std;
 
-double error = 1e-4;
+double error = 0.001;
 
 // Struct to store solutions
 struct solution {
@@ -43,7 +43,7 @@ void synDiv(vector<double> &coeff, vector<double> &bs, vector<double> &cs, doubl
 }
 
 void bairstow(vector<double> &coeff, vector<solution*> &roots, double ri, double si) {
-    // Loop for degree bigger than 2 (At least 3 roots)
+    // Loop for degree bigger than 2 (At least 3 roots). Size is 3 because is considering x^0.
     while (coeff.size() > 3) {
         vector<double> bs(coeff.size(), 0.0);
         vector<double> cs(coeff.size(), 0.0);
@@ -70,7 +70,7 @@ void bairstow(vector<double> &coeff, vector<solution*> &roots, double ri, double
             
             r += dr;
             s += ds;
-        } while(abs(dr / r) > error && abs(ds / s) > error); // Relative
+        } while(abs(dr / r) > error && abs(ds / s) > error); //ERROR PARCIAL2
         
         // Get determinant to set real or complex roots (2 roots)
         double det = pow(r, 2) + 4 * s;
@@ -135,6 +135,9 @@ void bairstow(vector<double> &coeff, vector<solution*> &roots, double ri, double
     }
     // If degree equals 1 (Size is 2, because ax + b)
     else if (coeff.size() == 2) {
+        cout << "Entro" << endl;
+        cout << coeff[0] << endl;
+        cout << coeff[1] << endl;
         solution *r = new solution;
         r->a = -coeff[1] / coeff[0];
         r->bi = 0;
@@ -169,7 +172,7 @@ int main(){
     
     // Print all roots
     cout << "Roots:" << endl;
-    for(int i = 0; i < roots.size(); i++) {
+    for(int i = 0; i < initDegree; i++) {
         // Complex root
         if(roots[i]->bi != 0){
             cout << "x" << i << " = " << roots[i]->a << " + " << roots[i]->bi << "i" << endl;

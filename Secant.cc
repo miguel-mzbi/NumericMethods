@@ -6,7 +6,7 @@
 using namespace std;
 
 double f(double x) {
-	return pow(x, 2);
+	return 9*exp(-0.7*x)*cos(4*x)-3.5;
 }
 
 int main() {
@@ -19,12 +19,13 @@ int main() {
     do {
         double a = f(xn);
         double b = f(xp);
-        xnt = xn - (f(xn) * (xp - xn)) / (f(xp) - f(xn));
+        xnt = xn - (f(xn) * (xp - xn)) / (f(xp) - f(xn)); // x-origin of secant
         xp = xn;
         xn = xnt;
         i++;
         cout << "Iteration: " << i << " Aproximation: " << xn << endl;
-    } while (abs(f(xn)) > pow(10, -12));
+    } while(abs(f(xn))*100 > 0.1); //ERROR PARCIAL 2
+    // abs(xn - xp) Iterative
 
     cout << "Root: " << xn << "\t\tIterations: " << i << "\t\tf(xf):" << f(xn) << endl;
 }
