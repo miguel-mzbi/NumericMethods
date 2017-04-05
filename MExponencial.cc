@@ -13,7 +13,7 @@ int main() {
     // st: yMes - avy
     // n: number of coords
     double x, y, xy, xsq, avy, xReal, yReal, yMes, sr, st, n, i, a1, a0;
-    x = y = xy = xsq = avy = xMes = yMes = yPros = i = 0;
+    x = y = xy = xsq = avy = xReal = yMes = yReal = i = 0;
     cout << "Write n: ";
     cin >> n;
     
@@ -62,6 +62,6 @@ int main() {
     double r2 = (st-sr)/st;
     double r = sqrt(r2);
     
-    cout << "β = " << a1 << "\tα = " << a0 << endl;
+    cout << endl << "β = " << a1 << "\tα = " << a0 << endl;
     cout << "Std. Error = " << stdError << "\tDetermiantion Coefficient = " << r2 << "\tCorrelation Coefficient = " << r << endl;
 }

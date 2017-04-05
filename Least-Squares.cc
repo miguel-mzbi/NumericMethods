@@ -40,7 +40,7 @@ int main() {
     for(int i = 0; i < n; i++) {
         myErrY >> yReal;
         myErrX >> xReal;
-        yMes = a0* + a1*xReal;
+        yMes = a0 + a1*xReal;
         sr += pow(yReal - yMes, 2);
         st += pow(yReal - avy, 2);
     }
@@ -52,7 +52,6 @@ int main() {
     double stdError = sqrt(sr/(n-2));
     double r2 = (st-sr)/st;
     double r = sqrt(r2);
-    
-    cout << "a1 = " << a1 << "\ta0 = " << a0 << endl;
+    cout << endl << "a1 = " << a1 << "\ta0 = " << a0 << endl;
     cout << "Std. Error = " << stdError << "\tDetermiantion Coefficient = " << r2 << "\tCorrelation Coefficient = " << r << endl;
 }
