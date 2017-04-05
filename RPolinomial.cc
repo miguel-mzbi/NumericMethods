@@ -99,8 +99,43 @@ int main() {
         }
     }
     
+    double solution[n+1];
+    cout << endl;
+    
     // Get solution
     for(int i = 0; i < n+1; i++) {
+        solution[i] = matrix[i][n+1];
         cout<< matrix[i][n+1] << " x^" << i << endl;
     }
+    
+    double sr, st, yAvg;
+    yAvg = yAccum/l;
+    
+    ifstream myErrX("x.txt");
+    ifstream myErrY("y.txt");
+    
+    // Loop to get errors
+    for(int i = 0; i < l; i++) {
+        double xReal, yReal, yMes;
+        yMes = 0;
+        myErrY >> yReal;
+        myErrX >> xReal;
+        for(int j = 0; j < n+1; j++) {
+            yMes += solution[j]*pow(xReal, j);
+        }
+        sr += pow(yReal - yMes, 2);
+        st += pow(yReal - yAvg, 2);
+    }
+    
+    myErrX.close();
+    myErrY.close();
+    
+    // Calculate error
+    double stdError = sqrt(sr/(l - (n + 1)));
+    double rSq = (st - sr)/st;
+    double r = sqrt(rSq);
+    
+    // Print errors
+    
+    cout << endl << "Standard Error = " << stdError << "\tDetermiantion Coefficient = " << rSq << "\tCorrelation Coefficient = " << r << endl;
 }
