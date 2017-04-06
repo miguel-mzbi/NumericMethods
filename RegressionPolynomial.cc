@@ -1,4 +1,4 @@
-// RPolinomial.cc: Miguel Montoya
+// Regression Polynomial.cc: Miguel Montoya
 // Description Polynomial Regression
 
 #include <iostream>
