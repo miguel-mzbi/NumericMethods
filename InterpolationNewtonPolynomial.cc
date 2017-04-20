@@ -18,7 +18,7 @@ double diffDivFin(int i0, int i1, double* xAt, double* yAt) {
 
 double NewtonInterpolation(double xAprox, int l, double* x, double* y) {
     
-    double yAprox, a0, a1, a2, b0, b1, b2, errorAbs, errorRel;
+    double yAprox;
     double diffsDivs[l];
     
     for(int i = 0; i < l; i++) {
