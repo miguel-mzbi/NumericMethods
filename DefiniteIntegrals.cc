@@ -8,7 +8,7 @@ using namespace std;
 
 double f(double x) {
 
-    return 0.2 + 25*x - 200*pow(x, 2) + 675*pow(x, 3) - 900*pow(x, 4) + 400*pow(x, 5); 
+    return exp(pow(x,2)); 
 }
 
 double functionIntegral(double x) {
@@ -50,11 +50,10 @@ double trapezium(int n, double a, double b) {
     double _a = a;
     double integral = f(a) + f(b);
     double integralSum = 0;
-    for(int i = 1; i < n-1; i++) {
-        integralSum += f(_a);
-        _a +=h;
+    for(double i = _a + h; i < b; i += h) {
+        integralSum += f(i);
     }
-    return (integral+2*integralSum)*h/2;
+    return (integral+ 2*integralSum)*h/2;
 }
 
 int main() {
@@ -83,9 +82,9 @@ int main() {
             break;
     }
 
-    percentualError = abs((integral(a, b)-defInt)/integral(a, b))*100;
+    //percentualError = abs((integral(a, b)-defInt)/integral(a, b))*100;
 
     cout << "Integral = " << defInt << endl;
-    cout << "Percentual Error = " << percentualError << "%" << endl;
+    //cout << "Percentual Error = " << percentualError << "%" << endl;
 
 }
