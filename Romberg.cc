@@ -8,7 +8,7 @@ using namespace std;
 
 double f(double x) {
 
-    return exp(pow(x,2)); 
+    return pow(x, 2); 
 }
 
 double trapezium(int n, double a, double b) {
@@ -29,7 +29,7 @@ double rombergHelper(double* approximationsLvl1, int k, int me) {
         return approximationsLvl1[me];
     }
     else {
-        return (4/3)*rombergHelper(approximationsLvl1, k-1, me+1) - (1/3)*rombergHelper(approximationsLvl1, k-1, me);
+        return (pow(4, k-1)*rombergHelper(approximationsLvl1, k-1, me+1) - rombergHelper(approximationsLvl1, k-1, me))/(pow(4, k-1)-1);
     }
 }
 
