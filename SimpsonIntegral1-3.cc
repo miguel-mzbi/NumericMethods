@@ -7,9 +7,16 @@
 
 using namespace std;
 
-double simpsonIntegralOneThird(double *x, double *y, int intervals, int extraIntervals) {
+double simpsonIntegralOneThird(double a, double b, double *y, int intervals, int extraIntervals) {
+    double h = (b-a)/(intervals);
+    double simpsonB = 0;
     int index = intervals - extraIntervals;
-    double coeff = (x[index] - x[0])/(3*index);
+    if(extraIntervals > 0 ) {
+        simpsonB = b-h;
+    }
+    else {
+        simpsonB = b;
+    }
     double integral, preIntegral, extraIntegral;
     integral = preIntegral = extraIntegral = 0;
 
@@ -20,27 +27,36 @@ double simpsonIntegralOneThird(double *x, double *y, int intervals, int extraInt
     for(int i = 2; i < index -1; i += 2) {
         preIntegral += 2*y[i];
     }
+    
+    integral = (h/3)*(y[0] + preIntegral + y[index]);
+    cout << "Integral from " << a << " to " << simpsonB << " = " << integral << endl;
 
     if(extraIntervals > 0) {
-        extraIntegral = (y[index]+y[index+1])*(x[index+1]-x[index])/2;
+        extraIntegral = (y[index]+y[intervals])*(b-simpsonB)/2;
+        cout << "Integral from " << simpsonB << " to " << b << " (Using trapezium) = " << extraIntegral << endl;
     }
 
-    integral = coeff*(y[0] + preIntegral + y[index]) + extraIntegral;
+    
 
-    return integral;
+    return integral + extraIntegral;
 }
 
 int main() {
 
     int l, numberIntervals, numberSimpsonIntervals, extraIntervals;
     l = numberIntervals = numberSimpsonIntervals, extraIntervals = 0;
-    double integral, realIntegral;
-    integral = realIntegral = 0;
+    double integral, realIntegral, a, b;
+    integral = realIntegral = a = b = 0;
     
     cout << "Write the number of coordinates ";
     cin >> l;
 
-    cout << "The coordinates are read from x.txt and y.txt" << endl;
+    cout << "Initial integral limit a = ";
+    cin >> a;
+    cout << "Final integral limit b = ";
+    cin >> b;
+
+    cout << "The coordinates y are read y.txt" << endl;
 
     numberIntervals = l-1;
     numberSimpsonIntervals = numberIntervals/2;
@@ -51,21 +67,17 @@ int main() {
     cout << "Number of intervals where trapezoid integral will be used (Last): " << extraIntervals << endl;
 
 
-    double x[l];
     double y[l];
     
-    ifstream myX("x.txt");
     ifstream myY("y.txt");
 
-    for(int i = 0; i < l && myX && myY; i++) {
-        myX >> x[i];
+    for(int i = 0; i < l && myY; i++) {
         myY >> y[i];
     }
 
-    myX.close();
     myY.close();
 
-    integral = simpsonIntegralOneThird(x, y, numberIntervals, extraIntervals);
+    integral = simpsonIntegralOneThird(a, b, y, numberIntervals, extraIntervals);
     
     cout << "Integral = " << integral << endl;
 
